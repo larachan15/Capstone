@@ -77,13 +77,13 @@ router.post('/login', (req, res) => {
             // https://stackoverflow.com/questions/25838183/what-is-the-oauth-2-0-bearer-token-exactly
             jwt.sign(
               payload,
-              keys.secretKey),
+              keys.secretKey,
               (err, token) => {
                 res.json({
                   success: true,
                   token: 'Bearer ' + token
                 });
-              };
+              });
           } else {
             return res.status(400).json({password: 'Incorrect password'});
           }
