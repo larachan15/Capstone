@@ -95,5 +95,15 @@ router.post('/login', (req, res) => {
 // Route        GET api/users/current
 // Descripton   Return Current User
 // Access       Private
+router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
+      // For Postman tests:
+      // res.json({ message: 'Successful login!'});
+      // res.json(req.user);
+      res.json({
+        id: req.user.id,
+        name: req.user.name,
+        email: req.user.email
+      })
+});
 
 module.exports = router;
