@@ -4,6 +4,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
+const passport = require('passport');
 
 // Load User model
 const User = require('../../models/User');
@@ -77,7 +78,7 @@ router.post('/login', (req, res) => {
             // https://stackoverflow.com/questions/25838183/what-is-the-oauth-2-0-bearer-token-exactly
             jwt.sign(
               payload,
-              keys.secretKey,
+              keys.secretOrKey,
               (err, token) => {
                 res.json({
                   success: true,
@@ -90,5 +91,9 @@ router.post('/login', (req, res) => {
         });
     });
 });
+
+// Route        GET api/users/current
+// Descripton   Return Current User
+// Access       Private
 
 module.exports = router;

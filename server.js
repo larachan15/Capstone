@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 
 const posts = require('./routes/api/posts');
 const profile = require('./routes/api/profile');
@@ -32,7 +33,11 @@ mongoose
 //   }
 // });
 
-app.get('/', (req, res) => res.send('This is my server. Yay it is running! Look at it goooo!!!!!'));
+// app.get('/', (req, res) => res.send('This is my server. Yay it is running! Look at it goooo!!!!!'));
+
+// Passport configurations, Jwt Strategy
+app.use(passport.initialize());
+require('./config/passport')(passport);
 
 // Routes
 app.use('/api/posts', posts);
