@@ -8,6 +8,7 @@ const passport = require('passport');
 
 // Input Validations
 const validateRegistrationInput = require('../../validation/registration');
+const validateLoginInput = require('../../validation/login');
 
 // Load User model
 const User = require('../../models/User');
@@ -60,6 +61,13 @@ router.post('/registration', (req, res) => {
 // Descripton   Login user / Returning json web token token
 // Access       Public
 router.post('/login', (req, res) => {
+  const { errors, isValid } = validateLoginInput(req.body);
+
+  // Checking validation, if input is empty or not the correct number of characters
+  if(!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const email = req.body.email;
   const password = req.body.password;
 
