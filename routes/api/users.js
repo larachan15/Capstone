@@ -6,6 +6,9 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 
+// Input Validations
+const validateRegistrationInput = require('../../validation/registration');
+
 // Load User model
 const User = require('../../models/User');
 
@@ -18,7 +21,14 @@ router.get('/test', (req, res) => res.json({message: 'Users work yay!'}));
 // Route        GET api/users/register
 // Descripton   Register a user
 // Access       Public
-router.post('/register', (req, res) => {
+router.post('/registration', (req, res) => {
+  const { errors, isValid } = validateRegistrationInput(req.body);
+
+  // Checking validation, if input is empty or not the correct number of characters
+  if(!isValid) {
+    return res.status(400).json(errors);
+  }
+
   // to locate a record of a user with an email they are trying to register with
   User.findOne({ email: req.body.email })
     .then(user => {
