@@ -26,6 +26,7 @@ const User = require('../../models/User');
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
   // Using profile model to find the user
   Profile.findOne({ user: req.user.id })
+    .populate('user', 'name')
     .then(profile => {
       if(!profile) {
         return res.status(404).json({user: 'Profile not found!'})
@@ -33,6 +34,62 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
       res.json(profile);
     })
     .catch(err => res.status(404).json(err));
+});
+
+// Route        GET api/profile/all
+// Descripton   Get all user profiles
+// Access       Public
+router.get('/all', (req, res) => {
+  const errors = {};
+  Profile.find()
+    .populate('user', 'name')
+    .then(profiles => {
+      if(!profiles) {
+        errors.noProfiles = 'There are no profiles to show!';
+        return res.status(404).json(errors);
+      }
+
+      res.json(profiles);
+    })
+    .catch(err => res.status(404).json({ profile: 'There are no profiles!' }));
+})
+
+// userProfile is the backend API route (won't show up in front end url), not actually used by user
+// Route        GET api/profile/userProfile/:userProfile
+// Descripton   Obtain user profile by userProfile
+// Access       Public
+router.get('/userProfile/:userProfile', (req, res) => {
+  const errors = {};
+  Profile.findOne({ userProfile: req.params.userProfile })
+    .populate('user', 'name')
+    .then(profile => {
+      if(!profile) {
+        errors.noProfile = 'There is no profile for this user';
+        res.status(404).json(errors);
+      }
+      // if profile is found render 200 status
+      res.json(profile);
+    })
+    .catch(err => res.status(404).json(err));
+});
+
+// For internal use
+// Route        GET api/profile/user/:user_id
+// Descripton   Get profile by user ID
+// Access       Public
+router.get('/user/:user_id', (req, res) => {
+  const errors = {};
+  Profile.findOne({ user: req.params.user_id })
+    .populate('user', 'name')
+    .then(profile => {
+      if(!profile) {
+        errors.noProfile = 'There is no profile for this user';
+        res.status(404).json(errors);
+      }
+      // if profile is found render 200 status
+      res.json(profile);
+    })
+    .catch(err => res.status(404).json({ profile: 'There is no profile for this user' }));
 });
 
 // Route        POST api/profile
