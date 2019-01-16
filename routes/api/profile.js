@@ -4,6 +4,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
 
+// Validation
+const validateProfileInput = require('../../validation/profile');
+
 // Profile Model
 const Profile = require('../../models/Profile');
 // User Model
@@ -30,6 +33,65 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
       res.json(profile);
     })
     .catch(err => res.status(404).json(err));
+});
+
+// Route        POST api/profile
+// Descripton   Creating or updating a user profile
+// Access       Private
+router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+  // Validation check
+  const { errors, isValid } = validateProfileInput(req.body);
+  if(!isValid) {
+    // Returns errors with a 400 status
+    return res.status(400).json(errors);
+  }
+
+  // Data from forms
+  const profileData = {};
+  profileData.user = req.user.id;
+  if(req.body.userProfile) {
+    profileData.userProfile = req.body.userProfile;
+  }
+  if(req.body.bio) {
+    profileData.bio = req.body.bio;
+  }
+  if(req.body.pronouns) {
+    profileData.pronouns = req.body.pronouns;
+  }
+  if(req.body.hometown) {
+    profileData.hometown = req.body.hometown;
+  }
+  if(req.body.interest) {
+    profileData.interests = req.body.interests;
+  }
+
+  // Find a logged in user
+  Profile.findOne({ user: req.user.id})
+    .then(profile => {
+      if(profile) {
+        // updates profile if it exists. Use findOneAndUpdate method, which gives back a promise
+        // When using the $set operator, only the specified fields are updated
+        Profile.findOneAndUpdate(
+          { user: req.user.id },
+          { $set: profileData },
+          { new: true }
+        )
+        // gives back a promise
+        .then(profile => res.json(profile));
+      } else {
+        // check to see if the userProfile exists
+        Profile.findOne({ userProfile: profileData.userProfile }).then(profile => {
+          if(profile) {
+            // if profile already exists, send back error
+            errors.userProfile = 'This profile already exists';
+            res.status(400).json(errors);
+          }
+          // creates new profile if it doesn't exist
+          new Profile(profileData).save()
+            .then(profile => res.json(profile));
+        });
+      }
+    })
 });
 
 module.exports = router;
