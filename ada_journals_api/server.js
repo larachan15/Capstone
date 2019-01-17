@@ -23,7 +23,7 @@ mongoose
   .connect(database, { useNewUrlParser: true })
   .then(() => console.log('MongoDB is connected!'))
   .catch(err => console.log(err));
-// mongoose.connect('mongodb://LaraChan15:LaraChan15@ds155714.mlab.com:55714/capstonec10', {
+// mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds155714.mlab.com:55714/capstonec10', {
 //   useNewUrlParser: true
 // }, function(error){
 //   if(error){
