@@ -1,4 +1,4 @@
-/node_modules
+node_modules
 package-lock.json
 /ada_journals_api/config/keys.js
 
