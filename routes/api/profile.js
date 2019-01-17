@@ -118,7 +118,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
   if(req.body.hometown) {
     profileData.hometown = req.body.hometown;
   }
-  if(req.body.interest) {
+  if(req.body.interests) {
     profileData.interests = req.body.interests;
   }
 
