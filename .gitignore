@@ -1,3 +1,8 @@
 /node_modules
 package-lock.json
-/config/keys.js
+/ada_journals_api/config/keys.js
+
+# OS X
+.DS_Store*
+Icon?
+._*
