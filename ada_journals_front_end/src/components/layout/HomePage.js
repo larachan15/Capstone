@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class HomePage extends Component {
   render() {
     return (
       <div className="homepage">
-        <div className="dark-overlay landing-inner text-dark">
+        <div className="dark-overlay homepage-inner text-dark">
           <div className="container">
             <div className="row">
               <div className="col-md-12 text-center">
@@ -16,12 +17,12 @@ class HomePage extends Component {
                   A place to facilitate the organization of online learning by creating a more efficient process while promoting the ethical use of technology.
                 </p>
                 <hr />
-                <a href="registration.html" className="btn btn-lg btn-info mr-2">
+                <Link to="/registration" className="btn btn-lg btn-info mr-2">
                   Sign Up
-                </a>
-                <a href="login.html" className="btn btn-lg btn-warning">
+                </Link>
+                <Link to="/login" className="btn btn-lg btn-warning">
                   Login
-                </a>
+                </Link>
               </div>
             </div>
           </div>
