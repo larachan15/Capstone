@@ -1,5 +1,5 @@
 {
-  "name": "ada_journals_api",
+  "name": "c10capstone_api",
   "version": "1.0.0",
   "description": "Social network for Ada students",
   "main": "server.js",
