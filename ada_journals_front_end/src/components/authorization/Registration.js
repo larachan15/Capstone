@@ -12,13 +12,6 @@ class Registration extends Component {
       name: '',
       email: '',
       password: '',
-      errors: {}
-    }
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({errors: nextProps.errors});
     }
   }
 
@@ -30,6 +23,7 @@ class Registration extends Component {
 
     const newState = {};
     newState[field] = value;
+    // this.setState({ [field]: value });
     this.setState(newState);
     console.log(newState);
   }
@@ -42,12 +36,6 @@ class Registration extends Component {
       email: this.state.email,
       password: this.state.password
     };
-
-    this.setState({
-      name: '',
-      email: '',
-      password: ''
-    })
 
     this.props.registerUser(newUser, this.props.history);
     // console.log(newUser);
@@ -62,8 +50,8 @@ class Registration extends Component {
   }
 
   render() {
-    const { errors } = this.state;
-    console.log(errors);
+    const { errors } = this.props;
+    const { name, email, password } = this.state;
 
     return (
       <div className="register">
@@ -81,7 +69,7 @@ class Registration extends Component {
                     className={classnames("form-control form-control-lg", { "is-invalid" : errors.name })}
                     placeholder="Name"
                     name="name"
-                    value={this.state.name}
+                    value={name}
                     onChange={this.onChange}
                   />
                   {errors.name && (<div className="invalid-feedback">{errors.name}</div>)}
@@ -92,7 +80,7 @@ class Registration extends Component {
                     className={classnames("form-control form-control-lg", { "is-invalid" : errors.email })}
                     placeholder="Email Address"
                     name="email"
-                    value={this.state.email}
+                    value={email}
                     onChange={this.onChange}
                   />
                   {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
@@ -103,7 +91,7 @@ class Registration extends Component {
                     className={classnames("form-control form-control-lg", { "is-invalid" : errors.email })}
                     placeholder="Password"
                     name="password"
-                    value={this.state.password}
+                    value={password}
                     onChange={this.onChange}
                   />
                   {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
