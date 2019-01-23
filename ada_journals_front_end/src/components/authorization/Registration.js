@@ -14,6 +14,12 @@ class Registration extends Component {
       password: ''
     }
   }
+  
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+  }
 
   onChange = (event) => {
     console.log("Some stuff was typed in the form!");
@@ -111,7 +117,7 @@ Registration.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
-}
+};
 
 // getting state into our component
 const mapStateToProps = (state) => {

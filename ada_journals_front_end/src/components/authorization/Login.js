@@ -38,8 +38,15 @@ class Login extends Component {
     this.props.loginUser(existingUser);
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.isAuthenticated !== prevProps.isAuthenticated) {
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+  }
+
+  // Not sure why this doesn't redirect to the dashboard like it should.
+  // componentDidUpdate() {
+  //   if (this.props.isAuthenticated) {
   //     this.props.history.push('/dashboard');
   //   }
   // }

@@ -37,7 +37,7 @@ export const loginUser = (userData) => {
       const { token } = response.data;
       // Setting token to local storage which only stores strings.
       localStorage.setItem('jwtToken', token);
-      // Set token to authorization header
+      // Setting token to authorization header
       setAuthToken(token);
       // Decoding token to get user data to get issued at date
       const decoded = jwt_decode(token);
@@ -58,5 +58,17 @@ export const setCurrentUser = (decoded) => {
   return {
     type: SET_CURRENT_USER,
     payload: decoded
+  }
+}
+
+// Loggin out a user
+export const logoutUser = () => {
+  return (dispatch) => {
+    // remove the token from the localStorage
+    localStorage.removeItem('jwtToken');
+    // remove auth header for new requests
+    setAuthToken(false);
+    // set current user to an empty object (initial state), resets isAuthenticated to false
+    dispatch(setCurrentUser({}));
   }
 }
