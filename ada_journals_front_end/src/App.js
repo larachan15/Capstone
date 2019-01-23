@@ -15,6 +15,7 @@ import Login from './components/authorization/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import CreateProfile from './components/profile/CreateProfile';
 import EditProfile from './components/profile/EditProfile';
+import Profiles from './components/profile/Profiles';
 
 import './App.css';
 
@@ -42,6 +43,7 @@ class App extends Component {
               <Route exact path="/dashboard" component={ Dashboard } />
               <Route exact path="/create-profile" component={ CreateProfile } />
               <Route exact path="/edit-profile" component={ EditProfile } />
+              <Route exact path="/profiles" component={ Profiles } />
             </div>
             <Footer />
           </div>

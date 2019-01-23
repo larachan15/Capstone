@@ -29,6 +29,7 @@ class CreateProfile extends Component {
 
     if (nextProps.profile.profile) {
       const profile = nextProps.profile.profile;
+      console.log(profile);
 
       profile.bio = !isEmpty(profile.bio) ? profile.bio : '';
       profile.pronouns = !isEmpty(profile.pronouns) ? profile.bio : '';
@@ -46,7 +47,7 @@ class CreateProfile extends Component {
   }
 
   onChange = (event) => {
-    console.log("Some stuff was typed in the profile form!");
+    // console.log("Some stuff was typed in the profile form!");
 
     const field = event.target.name;
     const value = event.target.value;
@@ -55,7 +56,7 @@ class CreateProfile extends Component {
     newState[field] = value;
     // this.setState({ [field]: value });
     this.setState(newState);
-    console.log(newState);
+    // console.log(newState);
   }
 
   onFormSubmit = (event) => {
@@ -70,7 +71,7 @@ class CreateProfile extends Component {
     };
 
     this.props.createProfile(editProfile, this.props.history);
-    // console.log(newProfile);
+    // console.log(editProfile);
   }
 
   render() {
