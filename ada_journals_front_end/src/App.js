@@ -12,6 +12,7 @@ import Footer from './components/layout/Footer';
 import HomePage from './components/layout/HomePage';
 import Registration from './components/authorization/Registration';
 import Login from './components/authorization/Login';
+import Dashboard from './components/dashboard/Dashboard';
 
 import './App.css';
 
@@ -36,6 +37,8 @@ class App extends Component {
             <div className="container">
               <Route exact path="/registration" component={ Registration } />
               <Route exact path="/login" component={ Login } />
+                <Route exact path="/dashboard" component={ Dashboard } />
+
             </div>
             <Footer />
           </div>
