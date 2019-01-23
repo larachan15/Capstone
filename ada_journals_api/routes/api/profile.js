@@ -149,6 +149,22 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
         });
       }
     })
+
 });
+
+// Route   DELETE api/profile
+// Description    Delete user and their profile
+// Access  Private
+router.delete(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    Profile.findOneAndRemove({ user: req.user.id }).then(() => {
+      User.findOneAndRemove({ _id: req.user.id }).then(() =>
+        res.json({ success: true })
+      );
+    });
+  }
+);
 
 module.exports = router;

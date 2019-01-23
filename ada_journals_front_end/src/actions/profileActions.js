@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, GET_ERRORS } from './types';
+import { GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, GET_ERRORS, SET_CURRENT_USER } from './types';
 
 export const getCurrentProfile = () => {
   return(dispatch) => {
@@ -27,6 +27,26 @@ export const createProfile = (profileData, history) => {
     axios.post('/api/profile', profileData)
     .then((response) => {
       history.push('/dashboard')
+    })
+    .catch((errors) => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: errors.response.data
+      })
+    })
+  }
+}
+
+// Will delete both user and profile
+export const deleteMyAccount = () => {
+  return(dispatch) => {
+    if(window.confirm('Are you sure you want to delete your account forever?'))
+    axios.delete('/api/profile')
+    .then((response) => {
+      dispatch({
+        type: SET_CURRENT_USER,
+        payload: {}
+      })
     })
     .catch((errors) => {
       dispatch({
