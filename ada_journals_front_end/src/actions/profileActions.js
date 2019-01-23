@@ -22,6 +22,21 @@ export const getCurrentProfile = () => {
   }
 }
 
+export const createProfile = (profileData, history) => {
+  return(dispatch) => {
+    axios.post('/api/profile', profileData)
+    .then((response) => {
+      history.push('/dashboard')
+    })
+    .catch((errors) => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: errors.response.data
+      })
+    })
+  }
+}
+
 export const setProfileLoading = () => {
   return {
     type: PROFILE_LOADING

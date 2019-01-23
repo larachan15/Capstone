@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { createProfile } from '../../actions/profileActions';
+import classnames from 'classnames';
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -14,8 +17,36 @@ class CreateProfile extends Component {
     }
   }
 
+  onChange = (event) => {
+    console.log("Some stuff was typed in the profile form!");
+
+    const field = event.target.name;
+    const value = event.target.value;
+
+    const newState = {};
+    newState[field] = value;
+    // this.setState({ [field]: value });
+    this.setState(newState);
+    console.log(newState);
+  }
+
+  onFormSubmit = (event) => {
+    event.preventDefault();
+
+    const newProfile = {
+      userProfile: this.state.userProfile,
+      bio: this.state.bio,
+      pronouns: this.state.pronouns,
+      hometown: this.state.hometown,
+      interests: this.state.interests
+    };
+
+    this.props.createProfile(newProfile, this.props.history);
+    // console.log(newProfile);
+  }
+
   render() {
-    // const { errors } = this.props;
+    const { errors } = this.props;
     const { userProfile, bio, pronouns, hometown, interests } = this.state;
 
     return (
@@ -28,56 +59,62 @@ class CreateProfile extends Component {
                 Add your info here!
               </p> */ }
               <small className="d-block pb-3">* a required field</small>
-              <form>
+              <form onSubmit={this.onFormSubmit}>
                 <div className="form-group">
                   <input
-                    type="userProfile"
-                    className="form-control form-control-lg"
-                    placeholder="* User Name"
+                    type="text"
+                    className={classnames("form-control form-control-lg", { "is-invalid" : errors.userProfile })}
+                    placeholder="* User Profile"
                     name="userProfile"
                     value={userProfile}
-                    info="A username for your profile URL."
+                    onChange={this.onChange}
                   />
+                  {errors.userProfile && (<div className="invalid-feedback">{errors.userProfile}</div>)}
+                  <small className="d-block">A username for your profile URL.</small>
                 </div>
                 <div className="form-group">
                   <textarea
-                    type="bio"
+                    type="text"
                     className="form-control form-control-lg"
                     placeholder="Bio"
                     name="bio"
                     value={bio}
-                    info="Tell us a little about yourself"
+                    onChange={this.onChange}
                   />
+                  <small className="d-block">Tell us a little about yourself.</small>
                 </div>
                 <div className="form-group">
                   <input
-                    type="pronouns"
+                    type="text"
                     className="form-control form-control-lg"
                     placeholder="Pronouns"
                     name="pronouns"
                     value={pronouns}
-                    info="What are your preferred pronouns?"
+                    onChange={this.onChange}
                   />
+                  <small className="d-block">What are your preferred pronouns?</small>
                 </div>
                 <div className="form-group">
                   <input
-                    type="hometown"
+                    type="text"
                     className="form-control form-control-lg"
                     placeholder="Hometown"
                     name="hometown"
                     value={hometown}
-                    info="Where are you from?"
+                    onChange={this.onChange}
                   />
+                  <small className="d-block">Where are you from?</small>
                 </div>
                 <div className="form-group">
                   <textarea
-                    type="interests"
+                    type="text"
                     className="form-control form-control-lg"
                     placeholder="Interests"
                     name="interests"
                     value={interests}
-                    info="What do you like to do?"
+                    onChange={this.onChange}
                   />
+                  <small className="d-block">What do you like to do?</small>
                 </div>
                 <input
                   type="submit"
@@ -104,4 +141,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(CreateProfile);
+export default connect(mapStateToProps, { createProfile } )(withRouter(CreateProfile));
