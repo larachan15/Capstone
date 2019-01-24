@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { GET_PROFILE, PROFILE_LOADING, CLEAR_CURRENT_PROFILE, GET_ERRORS, SET_CURRENT_USER, GET_PROFILES } from './types';
 
+// gets current profile
 export const getCurrentProfile = () => {
   return(dispatch) => {
     dispatch(setProfileLoading());
@@ -22,6 +23,27 @@ export const getCurrentProfile = () => {
   }
 }
 
+// gets individual user by userProfile
+export const getProfileByUserProfile = (userProfile) => {
+  return(dispatch) => {
+    dispatch(setProfileLoading());
+    axios.get(`/api/profile/userProfile/${userProfile}`)
+      .then((response) =>
+        dispatch({
+          type: GET_PROFILE,
+          payload: response.data
+        })
+      )
+      .catch(err =>
+        dispatch({
+          type: GET_PROFILE,
+          payload: null
+        })
+      );
+    }
+}
+
+// gets all profiles
 export const getProfiles = () => {
   return(dispatch) => {
     dispatch(setProfileLoading());
@@ -42,7 +64,7 @@ export const getProfiles = () => {
   }
 }
 
-
+// creates a new profile
 export const createProfile = (profileData, history) => {
   return(dispatch) => {
     axios.post('/api/profile', profileData)

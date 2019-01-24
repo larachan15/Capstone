@@ -6,7 +6,7 @@ import { createProfile, getCurrentProfile } from '../../actions/profileActions';
 import classnames from 'classnames';
 import isEmpty from '../../validation/isEmpty';
 
-class CreateProfile extends Component {
+class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,11 +15,12 @@ class CreateProfile extends Component {
       pronouns: '',
       hometown: '',
       interests: ''
-    }
+    };
   }
 
   componentDidMount() {
     this.props.getCurrentProfile();
+    console.log(this.props.getCurrentProfile);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -29,7 +30,7 @@ class CreateProfile extends Component {
 
     if (nextProps.profile.profile) {
       const profile = nextProps.profile.profile;
-      console.log(profile);
+      // console.log(nextProps, "this is next Props");
 
       profile.bio = !isEmpty(profile.bio) ? profile.bio : '';
       profile.pronouns = !isEmpty(profile.pronouns) ? profile.bio : '';
@@ -155,7 +156,7 @@ class CreateProfile extends Component {
   }
 }
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
@@ -169,4 +170,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { createProfile, getCurrentProfile } )(withRouter(CreateProfile));
+export default connect(mapStateToProps, { createProfile, getCurrentProfile } )(withRouter(EditProfile));

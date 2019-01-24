@@ -18,7 +18,7 @@ class CreateProfile extends Component {
   }
 
   onChange = (event) => {
-    console.log("Some stuff was typed in the profile form!");
+    // console.log("Some stuff was typed in the profile form!");
 
     const field = event.target.name;
     const value = event.target.value;

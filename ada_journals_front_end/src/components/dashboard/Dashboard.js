@@ -21,7 +21,7 @@ class Dashboard extends Component {
 
     let dashboardInfo;
     if(profile === null || loading) {
-      dashboardInfo = <h3>Loading...</h3>
+      dashboardInfo = <h2>Loading...</h2>
     } else {
       if(Object.keys(profile).length > 0) {
         dashboardInfo = (
@@ -36,7 +36,7 @@ class Dashboard extends Component {
       } else {
         dashboardInfo = (
           <div>
-            <p className="lead text-musted">Hello, { user.name }. </p>
+            <p className="lead text-muted">Hello, { user.name }. </p>
             <p>You don't have a profile yet, so let's set one up for you.</p>
             <Link to="/create-profile" className="btn btn-lg btn-outline-secondary">Create Profile</Link>
           </div>

@@ -14,7 +14,7 @@ class Profiles extends Component {
     let eachProfile;
 
     if(profiles === null || loading) {
-      eachProfile = <h3>Loading profiles...</h3>
+      eachProfile = <h2>Loading profiles...</h2>
     } else {
       if(profiles.length > 0) {
         eachProfile = profiles.map(profile => (
