@@ -123,4 +123,50 @@ router.post('/unlike/:id', passport.authenticate('jwt', { session: false }), (re
   }
 );
 
+// Route        POST api/posts/comment/:id
+// Descripton   Comment on a post
+// Access       Private
+router.post('/comment/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  const { errors, isValid } = validatePostInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  Post.findById(req.params.id)
+    .then(post => {
+      const newComment = {
+        text: req.body.text,
+        name: req.body.name,
+        user: req.user.id
+      }
+
+      post.comments.push(newComment);
+      post.save().then(post => res.json(post))
+    })
+    .catch(err => res.status(404).json({ postNotFound: 'No post found'}));
+});
+
+// Route        DELETE api/posts/comment/:id/:comment_id
+// Descripton   Remove a comment on a post
+// Access       Private
+router.delete('/comment/:id/:comment_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Post.findById(req.params.id)
+    .then(post => {
+      // Checking to see if comment exists
+      if (post.comments.filter(comment => comment._id.toString() === req.params.comment_id).length === 0) {
+        return res.status(404).json({ noExistingComment: `Comment doesn't exist` })
+      }
+
+      // Remove index and splice out of array
+      const removeIndex = post.comments
+        .map(item => item._id.toString())
+        .indexOf(req.params.comment_id);
+
+      post.comments.splice(removeIndex, 1);
+      post.save().then(post => res.json(post));
+    })
+    .catch(err => res.status(404).json({ postNotFound: 'No post found'}));
+});
+
 module.exports = router;
