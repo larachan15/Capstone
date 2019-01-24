@@ -13,7 +13,7 @@ class EachProfile extends Component {
           <div className="col-lg-6 col-md-4 col-8">
             <h4>{profile.user.name}</h4>
             <p> {isEmpty(profile.bio) ? null : <span>{profile.bio}</span>}</p>
-            <Link to={`/profile/${profile.userProfile}`} className="btn btn-info">View Profile</Link>
+            <Link to={`/profile/${profile.userProfile}`} className="btn btn-dark">View Profile</Link>
           </div>
         </div>
       </div>

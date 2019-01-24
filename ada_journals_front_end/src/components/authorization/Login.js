@@ -15,8 +15,7 @@ class Login extends Component {
   }
 
   onChange = (event) => {
-    console.log("More stuff was typed in the form!");
-
+    // console.log("More stuff was typed in the form!");
     const field = event.target.name;
     const value = event.target.value;
 

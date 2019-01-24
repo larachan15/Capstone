@@ -17,6 +17,7 @@ import CreateProfile from './components/profile/CreateProfile';
 import EditProfile from './components/profile/EditProfile';
 import Profiles from './components/profile/Profiles';
 import Profile from './components/profile/Profile';
+import Posts from './components/posts/Posts';
 
 import './App.css';
 
@@ -46,6 +47,7 @@ class App extends Component {
               <Route exact path="/edit-profile" component={ EditProfile } />
               <Route exact path="/profiles" component={ Profiles } />
               <Route exact path="/profile/:userProfile" component={ Profile } />
+              <Route exact path="/feed" component={ Posts } />
             </div>
             <Footer />
           </div>
