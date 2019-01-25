@@ -65,7 +65,7 @@ class CommentForm extends Component {
                 />
                 { errors.text && (<div className="invalid-feedback">{errors.text}</div>) }
               </div>
-              <button type="submit" className="btn btn-dark">
+              <button type="submit" className="btn btn-md btn-dark mb-3">
                 Submit
               </button>
             </form>

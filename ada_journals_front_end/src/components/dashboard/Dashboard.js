@@ -26,9 +26,15 @@ class Dashboard extends Component {
       if(Object.keys(profile).length > 0) {
         dashboardInfo = (
           <div>
-            <h3 className="display-5 text-muted mt-4">Hello, <Link to={`/profile/${profile.userProfile}`}
-                className="display-5 text-muted mb-1">{ user.name }</Link>. </h3>
-            <ProfileButtons />
+            <h3 className="display-5 text-muted mt-4">Hello, { user.name }! </h3>
+              <div className="btn-group mt-4 mr-3 btn-block">
+              <ProfileButtons />
+                <div >
+                  <Link to={`/profile/${profile.userProfile}`} className="btn btn-dark btn-group mt-4 mr-3 btn-block">
+                    <i className="fas fa-eye" /> View Your Profile
+                  </Link>
+                </div>
+              </div>
             { /* <button
               className="btn btn-danger"
               onClick={this.onDeleteClick.bind(this)}>Delete My Account</button> */ }
