@@ -52,13 +52,13 @@ class CommentForm extends Component {
     return (
       <div className="post-form mb-3">
         <div className="card card-info">
-          <h4 className="card-header text-muted">Write a comment...</h4>
+          <h4 className="card-header text-muted">Comment on this post...</h4>
           <div className="card-body">
             <form onSubmit={this.onFormSubmit}>
               <div className="form-group">
                 <textarea
                   className={classnames("form-control form-control-md", { "is-invalid" : errors.text })}
-                  placeholder="Comment on post"
+                  placeholder="What are your thoughts?"
                   name="text"
                   value={this.state.text}
                   onChange={this.onChange}
