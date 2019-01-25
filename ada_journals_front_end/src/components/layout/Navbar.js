@@ -18,20 +18,20 @@ class Navbar extends Component {
     const { isAuthenticated } = this.props.auth;
 
     const authLinks = (
-      <ul className="navbar-nav ml-auto">
+      <ul className="navbar-nav ml-auto ">
         <li className="nav-item">
-          <Link className="nav-link" to="/feed">
+          <Link className="nav-link text-white" to="/feed">
             Post Feed
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/dashboard">
+          <Link className="nav-link text-white" to="/dashboard">
             Dashboard
           </Link>
         </li>
         <li className="nav-item">
           <input
-            className="form-control form-control-md btn btn-outline-dark"
+            className="form-control form-control-md btn btn-outline-light"
             type="button"
             value="Log Out"
             onClick={this.onLogoutClick.bind(this)} />
@@ -42,12 +42,12 @@ class Navbar extends Component {
     const guestLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <Link className="nav-link" to="/registration">
+          <Link className="nav-link text-white" to="/registration">
             Sign Up
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/login">
+          <Link className="nav-link text-white" to="/login">
             Login
           </Link>
         </li>
@@ -55,9 +55,9 @@ class Navbar extends Component {
     );
 
     return (
-      <nav className="navbar navbar-expand-sm navbar-light bg-light mb-4">
+      <nav className="navbar navbar-expand-sm navbar-light bg-secondary mb-4">
         <div className="container">
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand text-white" to="/">
             Ada Journals
           </Link>
           <button
@@ -72,7 +72,7 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="/profiles">
+                <Link className="nav-link text-white" to="/profiles">
                   Adies
                 </Link>
               </li>

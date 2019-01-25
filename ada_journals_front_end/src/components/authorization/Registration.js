@@ -66,7 +66,7 @@ class Registration extends Component {
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up </h1>
               <p className="lead text-center">
-                Create your account here:
+                Create your account here
               </p>
               <form onSubmit={this.onFormSubmit}>
                 <div className="form-group">
@@ -102,7 +102,7 @@ class Registration extends Component {
                   />
                   {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
                 </div>
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <input type="submit" className="btn btn-dark btn-block mt-4" />
                 </form>
             </div>
           </div>

@@ -34,7 +34,7 @@ class PostItem extends Component {
       <div className="card card-body mb-3">
         <div className="row">
           <div className="col-md-2">
-            <p className="text-center">{post.name}</p>
+            <p className="text-left">{post.name}</p>
           </div>
           <div className="col-md-10">
             <p className="lead">{post.text}</p>

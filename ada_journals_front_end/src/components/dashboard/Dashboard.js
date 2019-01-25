@@ -11,9 +11,9 @@ class Dashboard extends Component {
     this.props.getCurrentProfile();
   }
 
-  // onDeleteClick(event) {
-  //   this.props.deleteMyAccount();
-  // }
+  onDeleteClick(event) {
+    this.props.deleteMyAccount();
+  }
 
   render() {
     const { user } = this.props.auth;
@@ -29,15 +29,16 @@ class Dashboard extends Component {
             <h3 className="display-5 text-muted mt-4">Hello, { user.name }! </h3>
               <div className="btn-group mt-4 mr-3 btn-block">
               <ProfileButtons />
-                <div >
+                <div>
                   <Link to={`/profile/${profile.userProfile}`} className="btn btn-dark btn-group mt-4 mr-3 btn-block">
                     <i className="fas fa-eye" /> View Your Profile
                   </Link>
+
                 </div>
+                <button
+                   className="btn btn-danger mt-4 ml-3 mr-3"
+                   onClick={this.onDeleteClick.bind(this)}>Delete Your Account</button>
               </div>
-            { /* <button
-              className="btn btn-danger"
-              onClick={this.onDeleteClick.bind(this)}>Delete My Account</button> */ }
           </div>
         )
       } else {

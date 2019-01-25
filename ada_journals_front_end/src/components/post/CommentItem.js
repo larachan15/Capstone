@@ -15,8 +15,7 @@ class CommentItem extends Component {
       <div className="card card-body mb-3">
         <div className="row">
           <div className="col-md-2">
-            <br />
-            <p className="border rounded border-warning text-center">{comment.name}</p>
+            <p className="text-left">{comment.name}</p>
           </div>
           <div className="col-md-10">
             <p className="lead">{comment.text}</p>

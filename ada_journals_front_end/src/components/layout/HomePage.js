@@ -13,19 +13,18 @@ class HomePage extends Component {
   render() {
     return (
       <div className="homepage">
-        <div className="dark-overlay homepage-inner text-dark">
+        <div className="dark-overlay homepage-inner text-white">
           <div className="container">
             <div className="row">
-              <div className="col-md-12 text-center">
+              <div className="col-md-12 text-center text-muted">
                 <h1 className="display-3 mb-4"> Ada Journals </h1>
-                <h2>Capture and share your notes/ideas with fellow Adies!</h2>
+                <h2 className="text-muted">Capture and share your notes/ideas with fellow Adies!</h2>
                 <hr />
                 <p className="lead">
-                  {' '}
                   A place to facilitate the organization of online learning by creating a more efficient process while promoting the ethical use of technology.
                 </p>
                 <hr />
-                <Link to="/registration" className="btn btn-lg btn-info mr-2">
+                <Link to="/registration" className="btn btn-lg btn-outline-secondary mr-2">
                   Sign Up
                 </Link>
                 <Link to="/login" className="btn btn-lg btn-warning">

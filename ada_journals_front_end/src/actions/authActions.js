@@ -1,11 +1,13 @@
 import axios from 'axios';
-import { GET_ERRORS, SET_CURRENT_USER } from './types';
+import { GET_ERRORS, CLEAR_ERRORS, SET_CURRENT_USER } from './types';
 import setAuthToken from '../utilities/setAuthToken';
 import jwt_decode from 'jwt-decode';
 
 // Registering a user
 export const registerUser = (userData, history) => {
   return (dispatch) => {
+    dispatch(clearErrors());
+
     // dispatching data to our reducer. If returning an object, it must have a type.
     // type: TEST_DISPATCH,
     // // action creator
@@ -31,6 +33,7 @@ export const registerUser = (userData, history) => {
 // Login/Get user token
 export const loginUser = (userData) => {
   return (dispatch) => {
+    dispatch(clearErrors());
     axios.post('/api/users/login', userData)
     .then((response) => {
       // Saving token to local storage
@@ -72,3 +75,10 @@ export const logoutUser = () => {
     dispatch(setCurrentUser({}));
   }
 }
+
+// Clear errors on form
+export const clearErrors = () => {
+  return {
+      type: CLEAR_ERRORS
+  };
+};

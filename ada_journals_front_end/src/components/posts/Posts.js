@@ -12,7 +12,7 @@ class Posts extends Component {
 
   render() {
     const { posts, loading } = this.props.post;
-    let postInfo
+    let postInfo;
 
     if (posts === null || loading) {
       postInfo = <h4>Loading...</h4>
