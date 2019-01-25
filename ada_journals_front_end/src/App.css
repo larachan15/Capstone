@@ -10,3 +10,34 @@
 .navbar a:hover {
   color: #FFFFFF;
 }
+
+img {
+  width: 100%;
+}
+
+.homepage {
+  position: relative;
+  /* background: url('./images/adac10.jpg') no-repeat; */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin-top: -24px;
+  margin-bottom: -50px;
+}
+
+.homepage-inner {
+  padding-top: 80px;
+}
+
+.dark-overlay {
+  background-color: rgba(0, 0, 0, 0.0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card-form {
+  opacity: 0.9;
+}
