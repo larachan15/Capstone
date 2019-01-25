@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_POST, GET_ERRORS, GET_POSTS, POST_LOADING, DELETE_POST } from './types';
+import { ADD_POST, GET_ERRORS, GET_POSTS, GET_POST, POST_LOADING, DELETE_POST } from './types';
 
 // Add a post
 export const addPost = (postData) => {
@@ -36,6 +36,27 @@ export const getPosts = () => {
     .catch((errors) => {
       dispatch({
         type: GET_POSTS,
+        payload: null
+      })
+    })
+  }
+}
+
+// Get a post
+export const getPost = (id) => {
+  return (dispatch) => {
+    dispatch(setPostLoading());
+    axios.get(`/api/posts/${id}`)
+      .then((response) => {
+        dispatch({
+          type: GET_POST,
+          payload: response.data
+        })
+      }
+    )
+    .catch((errors) => {
+      dispatch({
+        type: GET_POST,
         payload: null
       })
     })
@@ -91,6 +112,26 @@ export const unLike = (id) => {
     );
   }
 };
+
+// Add a comment
+export const addComment = (postId, commentData) => {
+  return (dispatch) => {
+    axios.post(`/api/posts/comment/${postId}`, commentData)
+      .then((response) => {
+        dispatch({
+          type: GET_POST,
+          payload: response.data
+        })
+      }
+    )
+    .catch((errors) => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: errors.response.data
+      })
+    })
+  }
+}
 
 
 // Loading state

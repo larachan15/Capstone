@@ -33,9 +33,9 @@ class EditProfile extends Component {
       // console.log(nextProps, "this is next Props");
 
       profile.bio = !isEmpty(profile.bio) ? profile.bio : '';
-      profile.pronouns = !isEmpty(profile.pronouns) ? profile.bio : '';
-      profile.hometown = !isEmpty(profile.hometown) ? profile.bio : '';
-      profile.interests = !isEmpty(profile.interests) ? profile.bio : '';
+      profile.pronouns = !isEmpty(profile.pronouns) ? profile.pronouns : '';
+      profile.hometown = !isEmpty(profile.hometown) ? profile.hometown : '';
+      profile.interests = !isEmpty(profile.interests) ? profile.interests : '';
 
       this.setState({
         userProfile: profile.userProfile,
